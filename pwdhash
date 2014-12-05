@@ -1,0 +1,28 @@
+#! /bin/bash
+##
+## Generate a password hash.
+##
+## Time-stamp: <2014-12-05 10:31:54 szi>
+##
+
+set -eu
+
+die () { echo "$0: ERROR: $*" >&2; exit 1; }
+
+if [ -z "${1:-}" ]; then
+	die "Domain argument missing."
+fi
+
+URL=$1; shift
+
+read -s -p "Password: " PW
+echo
+
+get () { curl -sSL https://www.pwdhash.com/"$*"; }
+
+scripts () { get | sed -n 's/.*script src="\(.*\).js".*/\1/p'; }
+
+smjs <(
+  for JS in $(scripts); do get "$JS".js; done
+  echo "print(new String(new SPH_HashedPassword('$PW','$URL')));"
+)

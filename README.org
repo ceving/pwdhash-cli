@@ -1,0 +1,22 @@
+* Pwdhash-cli
+
+** About
+   The command line version of Pwdhash downloads the JavaScript code
+   generating the password hash from pwdhash.com and uses SpiderMonkey
+   to evaluate it.
+
+** Usage
+   The scrpt pwdhash requires the domain name as an argument asks for
+   a password and prints the password hash on stdout.
+
+   : $ pwdhash google.com
+	 : Password: 123456
+	 : WPltEzM5
+
+	 The password will not be shown. It is only printed here for
+   illustration.
+
+** License
+   Pwdhash-cli is licensed under the [[license][GNU General Public License]].
+
+#+LINK: license https://raw.githubusercontent.com/ceving/pwdhash-cli/master/LICENSE
